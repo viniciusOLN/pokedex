@@ -1,16 +1,8 @@
 # pokedex
 
-A new Flutter project.
+Projeto criado com o objetivo de Estudar sobre TDD e Clean Architecture.
 
-## Getting Started
+API: [https://pokeapi.co/api/v2/]
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![pokedex](https://user-images.githubusercontent.com/61924090/191875939-b081ea3a-bef6-48b6-8a9f-1c77193344b8.png)
+![pokedex2](https://user-images.githubusercontent.com/61924090/191875951-852aa4f4-d7d3-4a71-8d32-a58d4efec574.png)
