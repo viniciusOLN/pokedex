@@ -43,7 +43,7 @@ class Failures {
     this.notFoundMessage = 'Pokemon não encontrado.',
     this.timeOutMessage = 'Tempo limite de resposta do servidor esgotado.',
     this.serverMessage = 'Erro ao tentar acessar o servidor.',
-    this.otherMessage = 'Erro ao tentar encontrar o pokemon, tente novamente.',
+    this.otherMessage = 'Erro! Por favor, tente novamente.',
   });
 
   Failure handleFailures(Object e) {

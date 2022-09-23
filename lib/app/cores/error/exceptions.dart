@@ -36,6 +36,7 @@ class OtherError implements Exception {
 
 class Errors {
   static handleError({int? statusCode}) {
+    print(statusCode);
     switch (statusCode) {
       case 404:
         return NotFoundException();
@@ -44,7 +45,7 @@ class Errors {
       case 500:
         return ServerException();
       default:
-        return OtherError();
+        return OtherError(message: '${statusCode}');
     }
   }
 }

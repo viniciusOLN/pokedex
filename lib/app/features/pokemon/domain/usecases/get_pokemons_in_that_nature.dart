@@ -4,15 +4,14 @@ import '../../../../cores/error/failures.dart';
 import '../entities/pokemon.dart';
 import '../repositories/pokemon_repository.dart';
 
-class GetPokemonByNatureUsecase {
+class GetPokemonsInThatNatureUsecase {
   final PokemonRepository repository;
 
-  GetPokemonByNatureUsecase(this.repository);
+  GetPokemonsInThatNatureUsecase(this.repository);
 
-  Future<Either<Failure, List<Pokemon>>> getPokemonByNature(
-    List<String> pokemonsNames,
-    int pagination,
+  Future<Either<Failure, List<String>>> getPokemonsInThatNature(
+    String nature,
   ) async {
-    return await repository.getPokemonByNature(pokemonsNames, pagination);
+    return await repository.getPokemonsInThatNature(nature);
   }
 }

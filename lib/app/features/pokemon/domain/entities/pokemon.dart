@@ -3,28 +3,26 @@ import 'stats.dart';
 import 'types.dart';
 
 class Pokemon {
-  int? id;
-  String? name;
-  int? baseExperience;
-  int? height;
-  bool? isDefault;
-  int? order;
-  int? weight;
-  List<Ability>? abilities;
-  String? urlImage;
-  List<Stats>? stats;
-  List<TypePokemon>? types;
+  String name;
+  int baseExperience;
+  int height;
+  bool isDefault;
+  int weight;
+  List<Ability> abilities;
+  List<Stat> stats;
+  List<TypePokemon> types;
+  String imageUrl;
+  bool isFavorite = false;
 
   Pokemon({
-    this.id,
-    this.name,
-    this.baseExperience,
-    this.height,
-    this.isDefault,
-    this.order,
-    this.weight,
-    this.abilities,
-    this.stats,
-    this.types,
+    this.name = '',
+    this.baseExperience = 0,
+    this.height = 0,
+    this.isDefault = false,
+    this.weight = 0,
+    required this.abilities,
+    this.imageUrl = '',
+    required this.stats,
+    required this.types,
   });
 }

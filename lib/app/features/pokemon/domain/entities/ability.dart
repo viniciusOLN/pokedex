@@ -1,6 +1,6 @@
 class Ability {
   String? name;
-  String? description;
+  String? url;
 
-  Ability({this.name, this.description});
+  Ability({this.name, this.url});
 }

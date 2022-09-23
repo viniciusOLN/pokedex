@@ -1,17 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pokedex/app/features/pokemon/data/models/ability_model.dart';
-import 'package:pokedex/app/features/pokemon/data/models/stats_model.dart';
+import 'package:pokedex/app/features/pokemon/data/models/stat_model.dart';
 
 void main() {
-  Stats tStat = Stats();
+  StatModel tStat = StatModel();
   test('should get a instance from stats class', () {
-    expect(tStat, isA<Stats>());
+    expect(tStat, isA<StatModel>());
   });
 
   test('should get a json from a stats class', () {
     tStat.baseStat = 0;
     tStat.effort = 0;
-    tStat.stat = Ability(name: 'adadad');
+    tStat.name = 'static';
+    tStat.url = 'url';
 
     Map<String, dynamic> tJson = tStat.toJson();
 
@@ -24,11 +24,12 @@ void main() {
       'effort': 0,
       'stat': {
         'name': 'aaaaa',
+        'url': 'url',
       }
     };
 
-    Stats tResult = Stats.fromJson(tJson);
+    StatModel tResult = StatModel.fromJson(tJson);
 
-    expect(tResult, isA<Stats>());
+    expect(tResult, isA<StatModel>());
   });
 }

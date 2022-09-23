@@ -2,14 +2,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pokedex/app/features/pokemon/data/models/ability_model.dart';
 
 void main() {
-  Ability tAbility = Ability();
+  AbilityModel tAbility = AbilityModel();
   test('should get a instance of ability class', () {
-    expect(tAbility, isA<Ability>());
+    expect(tAbility, isA<AbilityModel>());
   });
 
   test('should get a json from ability instance', () {
     tAbility.name = "Vinicius";
-    tAbility.description = "teste";
+    tAbility.url = "teste";
 
     Map<String, dynamic> tResult = tAbility.toJson();
 
@@ -17,10 +17,15 @@ void main() {
   });
 
   test('should get a instance with values from json', () {
-    Map<String, dynamic> tJson = {"name": 'Pikachu', 'description': 'aaaa'};
+    Map<String, dynamic> tJson = {
+      'ability': {
+        "name": 'Pikachu',
+        'url': 'aaaa',
+      }
+    };
 
-    Ability tResult = Ability.fromJson(tJson);
+    AbilityModel tResult = AbilityModel.fromJson(tJson);
 
-    expect(tResult, isA<Ability>());
+    expect(tResult, isA<AbilityModel>());
   });
 }

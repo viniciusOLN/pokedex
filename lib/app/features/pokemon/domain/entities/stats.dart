@@ -1,9 +1,13 @@
-import 'ability.dart';
+class Stat {
+  int baseStat;
+  int effort;
+  String name;
+  String url;
 
-class Stats {
-  int? baseStat;
-  int? effort;
-  Ability? stat;
-
-  Stats({this.baseStat, this.effort, this.stat});
+  Stat({
+    required this.baseStat,
+    required this.effort,
+    required this.name,
+    required this.url,
+  });
 }

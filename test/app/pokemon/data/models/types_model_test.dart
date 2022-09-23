@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pokedex/app/features/pokemon/data/models/ability_model.dart';
+import 'package:pokedex/app/features/pokemon/data/models/type_model.dart';
 import 'package:pokedex/app/features/pokemon/data/models/types_model.dart';
 
 void main() {
@@ -10,7 +10,7 @@ void main() {
 
   test('should get a json from type class', () {
     tType.slot = 1;
-    tType.type = Ability(name: 'adadada');
+    tType.type = TypeModel(name: 'adadada');
 
     Map<String, dynamic> tJson = tType.toJson();
 
@@ -20,8 +20,11 @@ void main() {
   test('should get a instance of type class from json', () {
     Map<String, dynamic> tJson = {
       'slot': 1,
-      'type': {
-        'name': 'adadad',
+      'types': {
+        'type': {
+          'name': 'eletric',
+          'url': 'url',
+        }
       }
     };
 

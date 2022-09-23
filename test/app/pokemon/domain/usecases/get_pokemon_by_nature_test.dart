@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:pokedex/app/features/pokemon/data/models/stat_model.dart';
 import 'package:pokedex/app/features/pokemon/domain/entities/ability.dart';
 import 'package:pokedex/app/features/pokemon/domain/entities/pokemon.dart';
-import 'package:pokedex/app/features/pokemon/domain/entities/stats.dart';
 import 'package:pokedex/app/features/pokemon/domain/entities/types.dart';
 import 'package:pokedex/app/features/pokemon/domain/repositories/pokemon_repository.dart';
 import 'package:pokedex/app/features/pokemon/domain/usecases/get_pokemon_by_nature.dart';
@@ -15,27 +15,28 @@ void main() {
   GetPokemonByNatureUsecase usecase = GetPokemonByNatureUsecase(repository);
   String tNature = "ground";
   Pokemon tPokemon = Pokemon(
-    id: 1,
     name: 'Pikachu',
     baseExperience: 20,
     height: 100,
     isDefault: false,
-    order: 2,
     weight: 100,
     abilities: [Ability(name: 'voar')],
-    stats: [Stats(baseStat: 100, effort: 100, stat: Ability(name: 'aadad'))],
-    types: [TypePokemon(slot: 20, type: Ability(name: 'ground'))],
+    stats: [StatModel(baseStat: 100, effort: 100, name: 'name', url: 'url')],
+    types: [TypePokemon(name: 'name', url: 'url')],
   );
 
+  List<Pokemon> tPokemons = [];
+  List<String> pokemonNames = [];
+
   test('should return a pokemon by his nature from repository', () async {
-    when(() => repository.getPokemonByNature(tNature)).thenAnswer(
-      (_) async => Right(tPokemon),
+    when(() => repository.getPokemonByNature(any(), any())).thenAnswer(
+      (_) async => Right(tPokemons),
     );
 
-    final result = await usecase.getPokemonByNature(tNature);
+    final result = await usecase.getPokemonByNature(pokemonNames, 1);
 
-    expect(result, Right(tPokemon));
-    verify(() => repository.getPokemonByNature(tNature));
+    expect(result, Right(tPokemons));
+    verify(() => repository.getPokemonByNature(pokemonNames, 1));
     verifyNoMoreInteractions(repository);
   });
 }

@@ -1,34 +1,34 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/app/cores/error/exceptions.dart';
 import 'package:pokedex/app/features/pokemon/data/datasources/pokemon_remote_datasource.dart';
-import 'package:dio/dio.dart';
-import 'package:pokedex/app/features/pokemon/data/models/pokemon_model.dart';
+import 'package:pokedex/app/features/pokemon/data/models/pokemon_thumbnail_model.dart';
 import '../../../fixture/fixture.dart';
 
 class MockDio extends Mock implements Dio {}
 
 void main() {
-  const pokemonName = "pikachu";
   final client = MockDio();
+  const tPagination = 20;
   final datasource = PokemonRemoteDataSourceImpl(
     client: client,
   );
-
-  Response mockDioToReturnJsonStatusCode200() {
-    return Response(
-      data: jsonDecode(fixture('teste.json')),
-      requestOptions: RequestOptions(path: ''),
-      statusCode: 200,
-    );
-  }
 
   Response mockDioToReturnJsonStatusCode(int statusCode) {
     return Response(
       data: {'404': statusCode},
       requestOptions: RequestOptions(path: ''),
       statusCode: statusCode,
+    );
+  }
+
+  Response mockDioToReturnJsonStatusCode200() {
+    return Response(
+      data: jsonDecode(fixture('teste_thumb.json')),
+      requestOptions: RequestOptions(path: ''),
+      statusCode: 200,
     );
   }
 
@@ -44,43 +44,20 @@ void main() {
           (_) async => mockDioToReturnJsonStatusCode(statusCode),
         );
 
-        final result = datasource.getPokemonByName(pokemonName);
+        final result = datasource.getAllPokemons(tPagination);
 
         await expectLater(() => result, throwsA(equals(exception)));
       },
     );
   }
 
-  group('requisitions |', () {
-    test(
-      'should make a GET requisition to pokeApi',
-      () async {
-        when(() => client.get(any())).thenAnswer(
-          (_) async => mockDioToReturnJsonStatusCode200(),
-        );
-
-        await datasource.getPokemonByName(pokemonName);
-
-        verify(
-          () => client.get(
-            'https://pokeapi.co/api/v2/pokemon/$pokemonName',
-          ),
-        );
-      },
+  test('should get a list of pokemons from api', () async {
+    when(() => client.get(any())).thenAnswer(
+      (_) async => mockDioToReturnJsonStatusCode200(),
     );
 
-    test(
-      'should make a GET requisition to pokeApi and return a pokemon',
-      () async {
-        when(() => client.get(any())).thenAnswer(
-          (_) async => mockDioToReturnJsonStatusCode200(),
-        );
-
-        final result = await datasource.getPokemonByName(pokemonName);
-
-        expect(result, isA<PokemonModel>());
-      },
-    );
+    final result = await datasource.getAllPokemons(tPagination);
+    expect(result, isA<List<PokemonThumbnailModel>>());
   });
 
   group('failures |', () {

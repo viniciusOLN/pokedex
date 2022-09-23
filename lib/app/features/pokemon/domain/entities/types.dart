@@ -1,8 +1,8 @@
 import 'ability.dart';
 
 class TypePokemon {
-  int? slot;
-  Ability? type;
+  String name;
+  String url;
 
-  TypePokemon({this.slot, this.type});
+  TypePokemon({this.name = '', this.url = ''});
 }

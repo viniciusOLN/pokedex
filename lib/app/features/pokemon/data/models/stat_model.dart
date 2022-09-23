@@ -1,30 +1,31 @@
-import 'package:pokedex/app/features/pokemon/domain/entities/ability.dart';
 import 'package:pokedex/app/features/pokemon/domain/entities/stats.dart';
 
-class StatModel extends Stats {
-  String? name;
-  String? urlStat;
-
+class StatModel extends Stat {
   StatModel({
-    this.name,
-    this.urlStat,
-  }) : super(stat: Ability(name: name, description: urlStat));
+    int baseStat = 0,
+    int effort = 0,
+    String name = '',
+    String url = '',
+  }) : super(baseStat: baseStat, effort: effort, name: name, url: url);
 
-  StatModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
+  factory StatModel.fromJson(Map<String, dynamic> json) {
+    return StatModel(
+      baseStat: json['base_stat'] ?? 0,
+      effort: json['effort'] ?? 0,
+      name: json['stat']['name'] ?? '',
+      url: json['stat']['url'] ?? '',
+    );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = name;
+    final Map<String, dynamic> data = <String, dynamic>{
+      'base_stat': baseStat,
+      'effort': effort,
+      'stat': {
+        'name': name,
+        'url': url,
+      }
+    };
     return data;
-  }
-
-  String? get getUrlStat {
-    return urlStat;
-  }
-
-  set setUrlStat(String? description) {
-    description = description;
   }
 }
